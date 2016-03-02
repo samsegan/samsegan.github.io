@@ -7081,14 +7081,18 @@ Elm.Main.make = function (_elm) {
       var delta = A2($Signal.map,function (t) {    return t / 20;},$Time.fps(10));
       return A2($Signal.sampleOn,delta,A3($Signal.map2,F2(function (v0,v1) {    return {ctor: "_Tuple2",_0: v0,_1: v1};}),delta,$Keyboard.arrows));
    }();
+   var genPic2 = function (_p0) {
+      var _p1 = _p0;
+      return _U.list([A2($Graphics$Collage.move,{ctor: "_Tuple2",_0: 0,_1: 0},$Graphics$Collage.toForm(A3($Graphics$Element.image,400,400,"lose.jpg")))]);
+   };
    var listEquals = F2(function (xs,ys) {
       return A3($List.foldl,F2(function (x,y) {    return x && y;}),true,A3($List.map2,F2(function (x,y) {    return _U.eq(x,y);}),xs,ys));
    });
    var gridEquals = F2(function (grid1,grid2) {    return A3($List.foldl,F2(function (x,y) {    return x && y;}),true,A3($List.map2,listEquals,grid1,grid2));});
    var padX = F2(function (xs,dirBool) {
       var length = $List.length(xs);
-      var _p0 = length;
-      switch (_p0)
+      var _p2 = length;
+      switch (_p2)
       {case 0: return _U.list([0,0,0,0]);
          case 1: return dirBool ? A2($Basics._op["++"],_U.list([0,0,0]),xs) : A2($Basics._op["++"],xs,_U.list([0,0,0]));
          case 2: return dirBool ? A2($Basics._op["++"],_U.list([0,0]),xs) : A2($Basics._op["++"],xs,_U.list([0,0]));
@@ -7097,63 +7101,63 @@ Elm.Main.make = function (_elm) {
    });
    var shiftX = function (xs) {    return A2($List.filter,function (x) {    return !_U.eq(x,0);},xs);};
    var insertAtPos = F3(function (xs,i,num) {
-      var _p1 = xs;
-      if (_p1.ctor === "[]") {
+      var _p3 = xs;
+      if (_p3.ctor === "[]") {
             return _U.list([]);
          } else {
-            var _p2 = _p1._1;
-            return _U.eq(i,0) ? A2($List._op["::"],num,_p2) : A2($List._op["::"],_p1._0,A3(insertAtPos,_p2,i - 1,num));
+            var _p4 = _p3._1;
+            return _U.eq(i,0) ? A2($List._op["::"],num,_p4) : A2($List._op["::"],_p3._0,A3(insertAtPos,_p4,i - 1,num));
          }
    });
    var findAtPos = F2(function (xs,i) {
       findAtPos: while (true) {
-         var _p3 = xs;
-         if (_p3.ctor === "[]") {
+         var _p5 = xs;
+         if (_p5.ctor === "[]") {
                return -1;
             } else {
-               if (_U.eq(i,0)) return _p3._0; else {
-                     var _v3 = _p3._1,_v4 = i - 1;
-                     xs = _v3;
-                     i = _v4;
+               if (_U.eq(i,0)) return _p5._0; else {
+                     var _v4 = _p5._1,_v5 = i - 1;
+                     xs = _v4;
+                     i = _v5;
                      continue findAtPos;
                   }
             }
       }
    });
-   var getTileAtPos = F2(function (grid,_p4) {
+   var getTileAtPos = F2(function (grid,_p6) {
       getTileAtPos: while (true) {
-         var _p5 = _p4;
-         var _p8 = _p5._1;
-         var _p7 = _p5._0;
-         var _p6 = grid;
-         if (_p6.ctor === "[]") {
+         var _p7 = _p6;
+         var _p10 = _p7._1;
+         var _p9 = _p7._0;
+         var _p8 = grid;
+         if (_p8.ctor === "[]") {
                return -1;
             } else {
-               if (_U.eq(_p7,0)) return A2(findAtPos,_p6._0,_p8); else {
-                     var _v7 = _p6._1,_v8 = {ctor: "_Tuple2",_0: _p7 - 1,_1: _p8};
-                     grid = _v7;
-                     _p4 = _v8;
+               if (_U.eq(_p9,0)) return A2(findAtPos,_p8._0,_p10); else {
+                     var _v8 = _p8._1,_v9 = {ctor: "_Tuple2",_0: _p9 - 1,_1: _p10};
+                     grid = _v8;
+                     _p6 = _v9;
                      continue getTileAtPos;
                   }
             }
       }
    });
-   var getNext = F4(function (grid,_p9,xBool,dirBool) {
-      var _p10 = _p9;
-      var _p12 = _p10._1;
-      var _p11 = _p10._0;
-      return xBool ? dirBool ? A2(getTileAtPos,grid,{ctor: "_Tuple2",_0: _p11,_1: _p12 + 1}) : A2(getTileAtPos,
+   var getNext = F4(function (grid,_p11,xBool,dirBool) {
+      var _p12 = _p11;
+      var _p14 = _p12._1;
+      var _p13 = _p12._0;
+      return xBool ? dirBool ? A2(getTileAtPos,grid,{ctor: "_Tuple2",_0: _p13,_1: _p14 + 1}) : A2(getTileAtPos,
       grid,
-      {ctor: "_Tuple2",_0: _p11,_1: _p12 - 1}) : dirBool ? A2(getTileAtPos,grid,{ctor: "_Tuple2",_0: _p11 + 1,_1: _p12}) : A2(getTileAtPos,
+      {ctor: "_Tuple2",_0: _p13,_1: _p14 - 1}) : dirBool ? A2(getTileAtPos,grid,{ctor: "_Tuple2",_0: _p13 + 1,_1: _p14}) : A2(getTileAtPos,
       grid,
-      {ctor: "_Tuple2",_0: _p11 - 1,_1: _p12});
+      {ctor: "_Tuple2",_0: _p13 - 1,_1: _p14});
    });
    var getYCol = F2(function (grid,i) {
-      var _p13 = grid;
-      if (_p13.ctor === "[]") {
+      var _p15 = grid;
+      if (_p15.ctor === "[]") {
             return _U.list([]);
          } else {
-            return A2($List._op["::"],A2(findAtPos,_p13._0,i),A2(getYCol,_p13._1,i));
+            return A2($List._op["::"],A2(findAtPos,_p15._0,i),A2(getYCol,_p15._1,i));
          }
    });
    var rotate = function (colgrid) {
@@ -7164,11 +7168,11 @@ Elm.Main.make = function (_elm) {
       return A2($List._op["::"],row1,A2($List._op["::"],row2,A2($List._op["::"],row3,A2($List._op["::"],row4,_U.list([])))));
    };
    var putYColHelper = F4(function (ys,i,grid,pos) {
-      var _p14 = grid;
-      if (_p14.ctor === "[]") {
+      var _p16 = grid;
+      if (_p16.ctor === "[]") {
             return _U.list([]);
          } else {
-            return A2($List._op["::"],A3(insertAtPos,_p14._0,i,A2(findAtPos,ys,pos)),A4(putYColHelper,ys,i,_p14._1,pos + 1));
+            return A2($List._op["::"],A3(insertAtPos,_p16._0,i,A2(findAtPos,ys,pos)),A4(putYColHelper,ys,i,_p16._1,pos + 1));
          }
    });
    var putYCol = F3(function (ys,i,grid) {    return A4(putYColHelper,ys,i,grid,0);});
@@ -7197,141 +7201,142 @@ Elm.Main.make = function (_elm) {
       return rotate(A2($List._op["::"],col1,A2($List._op["::"],col2,A2($List._op["::"],col3,A2($List._op["::"],col4,_U.list([]))))));
    });
    var manipX = F2(function (grid,dirBool) {
-      var _p15 = grid;
-      if (_p15.ctor === "[]") {
+      var _p17 = grid;
+      if (_p17.ctor === "[]") {
             return _U.list([]);
          } else {
-            return A2($List._op["::"],A2(manipRow,_p15._0,dirBool),A2(manipX,_p15._1,dirBool));
+            return A2($List._op["::"],A2(manipRow,_p17._0,dirBool),A2(manipX,_p17._1,dirBool));
          }
    });
    var insertRandInList = function (xs) {
       var seed0 = $Random.initialSeed(31415);
       var randVal = $Basics.fst(A2($Random.generate,A2($Random.$int,0,$List.length(xs)),seed0));
       var randPosVal = A2(findAtPos,xs,randVal);
-      var _p16 = randPosVal;
-      if (_p16 === 0) {
+      var _p18 = randPosVal;
+      if (_p18 === 0) {
             return {ctor: "_Tuple2",_0: A3(insertAtPos,xs,randVal,2),_1: true};
          } else {
             return {ctor: "_Tuple2",_0: xs,_1: false};
          }
    };
    var insertList = F2(function (xs,insertBool) {
-      var _p17 = xs;
-      if (_p17.ctor === "[]") {
+      var _p19 = xs;
+      if (_p19.ctor === "[]") {
             return _U.list([]);
          } else {
-            var _p19 = _p17._1;
-            var _p18 = _p17._0;
-            return _U.eq(_p18,0) && insertBool ? A2($List._op["::"],2,A2(insertList,_p19,false)) : A2($List._op["::"],_p18,A2(insertList,_p19,insertBool));
+            var _p21 = _p19._1;
+            var _p20 = _p19._0;
+            return _U.eq(_p20,0) && insertBool ? A2($List._op["::"],2,A2(insertList,_p21,false)) : A2($List._op["::"],_p20,A2(insertList,_p21,insertBool));
          }
    });
    var insertRandListHelper = F2(function (xs,insertBool) {
-      var _p20 = insertRandInList(xs);
-      var row = _p20._0;
-      var toInsert = _p20._1;
+      var _p22 = insertRandInList(xs);
+      var row = _p22._0;
+      var toInsert = _p22._1;
       return toInsert ? row : A2(insertList,xs,insertBool);
    });
    var sumList = F2(function (xs,val) {    return A3($List.foldl,F2(function (x,y) {    return x + y;}),val,xs);});
    var sumGrid = function (grid) {    return A3($List.foldl,sumList,0,grid);};
    var checkList = function (xs) {
       checkList: while (true) {
-         var _p21 = xs;
-         if (_p21.ctor === "[]") {
+         var _p23 = xs;
+         if (_p23.ctor === "[]") {
                return false;
             } else {
-               if (_U.eq(_p21._0,0)) return true; else {
-                     var _v16 = _p21._1;
-                     xs = _v16;
+               if (_U.eq(_p23._0,0)) return true; else {
+                     var _v17 = _p23._1;
+                     xs = _v17;
                      continue checkList;
                   }
             }
       }
    };
    var checkEmptyGrid = function (grid) {
-      var _p22 = grid;
-      if (_p22.ctor === "[]") {
+      var _p24 = grid;
+      if (_p24.ctor === "[]") {
             return false;
          } else {
-            return checkList(_p22._0) && checkEmptyGrid(_p22._1);
+            return checkList(_p24._0) && checkEmptyGrid(_p24._1);
          }
    };
    var insertRandomHelper = F2(function (grid,insertBool) {
-      var _p23 = grid;
-      if (_p23.ctor === "[]") {
+      var _p25 = grid;
+      if (_p25.ctor === "[]") {
             return _U.list([]);
          } else {
-            var _p25 = _p23._1;
-            var _p24 = _p23._0;
-            return checkList(_p24) ? A2($List._op["::"],A2(insertList,_p24,insertBool),A2(insertRandomHelper,_p25,false)) : A2($List._op["::"],
-            _p24,
-            A2(insertRandomHelper,_p25,insertBool));
+            var _p27 = _p25._1;
+            var _p26 = _p25._0;
+            return checkList(_p26) ? A2($List._op["::"],A2(insertList,_p26,insertBool),A2(insertRandomHelper,_p27,false)) : A2($List._op["::"],
+            _p26,
+            A2(insertRandomHelper,_p27,insertBool));
          }
    });
    var insertRandInGrid = function (grid) {    return A2(insertRandomHelper,grid,true);};
-   var update = F2(function (_p26,board) {
-      var _p27 = _p26;
-      var _p28 = _p27._1;
-      if (_U.cmp(_p28.y,0) > 0) {
-            var $new = A2(manipY,board,false);
-            return A2(gridEquals,$new,board) ? board : insertRandInGrid($new);
-         } else if (_U.cmp(_p28.y,0) < 0) {
-               var $new = A2(manipY,board,true);
-               return A2(gridEquals,$new,board) ? board : insertRandInGrid($new);
-            } else if (_U.cmp(_p28.x,0) > 0) {
-                  var $new = A2(manipX,board,true);
-                  return A2(gridEquals,$new,board) ? board : insertRandInGrid($new);
-               } else if (_U.cmp(_p28.x,0) < 0) {
-                     var $new = A2(manipX,board,false);
-                     return A2(gridEquals,$new,board) ? board : insertRandInGrid($new);
-                  } else return board;
+   var update2 = F2(function (_p28,board) {
+      var _p29 = _p28;
+      var _p30 = _p29._1;
+      var left = A2(manipX,board,false);
+      var leftTrue = A2(gridEquals,board,left);
+      var right = A2(manipX,board,true);
+      var rightTrue = A2(gridEquals,board,right);
+      var down = A2(manipY,board,true);
+      var downTrue = A2(gridEquals,board,down);
+      var up = A2(manipY,board,false);
+      var upTrue = A2(gridEquals,board,up);
+      return upTrue && (downTrue && (rightTrue && leftTrue)) ? _U.list([_U.list([0,0,0,0])
+                                                                       ,_U.list([0,0,0,0])
+                                                                       ,_U.list([0,0,0,0])
+                                                                       ,_U.list([0,0,0,0])]) : _U.cmp(_p30.y,
+      0) > 0 ? upTrue ? board : insertRandInGrid(up) : _U.cmp(_p30.y,0) < 0 ? downTrue ? board : insertRandInGrid(down) : _U.cmp(_p30.x,
+      0) > 0 ? rightTrue ? board : insertRandInGrid(right) : _U.cmp(_p30.x,0) < 0 ? leftTrue ? board : insertRandInGrid(left) : board;
    });
    var squareSize = 100;
-   var genSquare = F2(function (val,_p29) {
-      var _p30 = _p29;
-      var _p32 = _p30._1;
-      var _p31 = _p30._0;
+   var genSquare = F2(function (val,_p31) {
+      var _p32 = _p31;
+      var _p34 = _p32._1;
+      var _p33 = _p32._0;
       var tick = $Basics.round(A2($Basics.logBase,2,$Basics.toFloat(val)));
       return _U.eq(val,0) ? _U.list([]) : _U.cmp(tick,4) < 1 ? _U.list([A2($Graphics$Collage.move,
-                                                                       {ctor: "_Tuple2",_0: _p31,_1: _p32},
+                                                                       {ctor: "_Tuple2",_0: _p33,_1: _p34},
                                                                        A2($Graphics$Collage.alpha,
                                                                        0.75,
                                                                        A2($Graphics$Collage.filled,
                                                                        A3($Color.rgb,255,255 - tick * 50,100),
                                                                        $Graphics$Collage.square(squareSize - 2))))
                                                                        ,A2($Graphics$Collage.move,
-                                                                       {ctor: "_Tuple2",_0: _p31,_1: _p32},
+                                                                       {ctor: "_Tuple2",_0: _p33,_1: _p34},
                                                                        $Graphics$Collage.text($Text.bold(A2($Text.color,
                                                                        $Color.white,
                                                                        A2($Text.height,20,$Text.fromString($Basics.toString(val)))))))]) : _U.cmp(tick,
       8) < 1 ? _U.list([A2($Graphics$Collage.move,
-                       {ctor: "_Tuple2",_0: _p31,_1: _p32},
+                       {ctor: "_Tuple2",_0: _p33,_1: _p34},
                        A2($Graphics$Collage.filled,A3($Color.rgb,(tick - 4) * 50,100,100),$Graphics$Collage.square(squareSize - 2)))
                        ,A2($Graphics$Collage.move,
-                       {ctor: "_Tuple2",_0: _p31,_1: _p32},
+                       {ctor: "_Tuple2",_0: _p33,_1: _p34},
                        $Graphics$Collage.text($Text.bold(A2($Text.color,
                        $Color.white,
                        A2($Text.height,20,$Text.fromString($Basics.toString(val)))))))]) : _U.cmp(tick,12) < 1 ? _U.list([A2($Graphics$Collage.move,
-                                                                                                                         {ctor: "_Tuple2",_0: _p31,_1: _p32},
+                                                                                                                         {ctor: "_Tuple2",_0: _p33,_1: _p34},
                                                                                                                          A2($Graphics$Collage.filled,
                                                                                                                          A3($Color.rgb,255,255,(tick - 8) * 50),
                                                                                                                          $Graphics$Collage.square(squareSize - 2)))
                                                                                                                          ,A2($Graphics$Collage.move,
-                                                                                                                         {ctor: "_Tuple2",_0: _p31,_1: _p32},
+                                                                                                                         {ctor: "_Tuple2",_0: _p33,_1: _p34},
                                                                                                                          $Graphics$Collage.text($Text.bold(A2($Text.color,
                                                                                                                          $Color.white,
                                                                                                                          A2($Text.height,
                                                                                                                          20,
                                                                                                                          $Text.fromString($Basics.toString(val)))))))]) : _U.list([A2($Graphics$Collage.move,
                                                                                                                                                                                   {ctor: "_Tuple2"
-                                                                                                                                                                                  ,_0: _p31
-                                                                                                                                                                                  ,_1: _p32},
+                                                                                                                                                                                  ,_0: _p33
+                                                                                                                                                                                  ,_1: _p34},
                                                                                                                                                                                   A2($Graphics$Collage.filled,
                                                                                                                                                                                   $Color.white,
                                                                                                                                                                                   $Graphics$Collage.square(squareSize - 2)))
                                                                                                                                                                                   ,A2($Graphics$Collage.move,
                                                                                                                                                                                   {ctor: "_Tuple2"
-                                                                                                                                                                                  ,_0: _p31
-                                                                                                                                                                                  ,_1: _p32},
+                                                                                                                                                                                  ,_0: _p33
+                                                                                                                                                                                  ,_1: _p34},
                                                                                                                                                                                   $Graphics$Collage.text($Text.bold(A2($Text.color,
                                                                                                                                                                                   $Color.white,
                                                                                                                                                                                   A2($Text.height,
@@ -7347,6 +7352,15 @@ Elm.Main.make = function (_elm) {
       A2(genSquare,A2(findAtPos,row,2),{ctor: "_Tuple2",_0: 50,_1: 150 - $Basics.toFloat(i) * 100}),
       A2(genSquare,A2(findAtPos,row,3),{ctor: "_Tuple2",_0: 150,_1: 150 - $Basics.toFloat(i) * 100}))));
    });
+   var genPic = F2(function (val,_p35) {
+      var _p36 = _p35;
+      return _U.eq(val,0) || _U.cmp(val,16) > 0 ? _U.list([]) : _U.list([A2($Graphics$Collage.move,
+      {ctor: "_Tuple2",_0: _p36._0,_1: _p36._1},
+      $Graphics$Collage.toForm(A3($Graphics$Element.image,
+      squareSize - 10,
+      squareSize - 10,
+      A2($Basics._op["++"],"donald",A2($Basics._op["++"],$Basics.toString(val),".jpg")))))]);
+   });
    var score = 0;
    var gridSize = 4;
    var speed = 20;
@@ -7354,12 +7368,26 @@ Elm.Main.make = function (_elm) {
    var leftEdge = (0 - limit) / 2 + squareSize / 2;
    var p = {x: leftEdge,y: leftEdge,vx: 0,vy: 0,val: 2};
    var rightEdge = limit / 2 - squareSize / 2;
+   var moveTile = F2(function (keys,p) {
+      return _U.cmp(keys.y,0) > 0 ? _U.update(p,
+      {vx: _U.eq(p.x,leftEdge) || _U.eq(p.x,rightEdge) ? 0 : p.vx,vy: _U.eq(p.x,leftEdge) || _U.eq(p.x,rightEdge) ? speed : p.vy}) : _U.cmp(keys.y,
+      0) < 0 ? _U.update(p,
+      {vx: _U.eq(p.x,leftEdge) || _U.eq(p.x,rightEdge) ? 0 : p.vx,vy: _U.eq(p.x,leftEdge) || _U.eq(p.x,rightEdge) ? 0 - speed : p.vy}) : _U.cmp(keys.x,
+      0) > 0 ? _U.update(p,
+      {vx: _U.eq(p.y,leftEdge) || _U.eq(p.y,rightEdge) ? speed : p.vx,vy: _U.eq(p.y,leftEdge) || _U.eq(p.y,rightEdge) ? 0 : p.vy}) : _U.cmp(keys.x,
+      0) < 0 ? _U.update(p,{vx: _U.eq(p.y,leftEdge) || _U.eq(p.y,rightEdge) ? 0 - speed : p.vx,vy: _U.eq(p.y,leftEdge) || _U.eq(p.y,rightEdge) ? 0 : p.vy}) : p;
+   });
+   var physics = F2(function (dt,p) {
+      return _U.update(p,
+      {x: A2($Basics.min,A2($Basics.max,leftEdge,p.x + dt * p.vx),rightEdge),y: A2($Basics.min,A2($Basics.max,leftEdge,p.y + dt * p.vy),rightEdge)});
+   });
+   var update = F2(function (_p37,p) {    var _p38 = _p37;return A2(physics,_p38._0,A2(moveTile,_p38._1,p));});
    var gridToPic = function (grid) {
-      var _p33 = grid;
-      if (_p33.ctor === "::" && _p33._1.ctor === "::" && _p33._1._1.ctor === "::" && _p33._1._1._1.ctor === "::" && _p33._1._1._1._1.ctor === "[]") {
+      var _p39 = grid;
+      if (_p39.ctor === "::" && _p39._1.ctor === "::" && _p39._1._1.ctor === "::" && _p39._1._1._1.ctor === "::" && _p39._1._1._1._1.ctor === "[]") {
             return A2($Basics._op["++"],
-            A2(rowSquare,_p33._0,0),
-            A2($Basics._op["++"],A2(rowSquare,_p33._1._0,1),A2($Basics._op["++"],A2(rowSquare,_p33._1._1._0,2),A2(rowSquare,_p33._1._1._1._0,3))));
+            A2(rowSquare,_p39._0,0),
+            A2($Basics._op["++"],A2(rowSquare,_p39._1._0,1),A2($Basics._op["++"],A2(rowSquare,_p39._1._1._0,2),A2(rowSquare,_p39._1._1._1._0,3))));
          } else {
             return _U.eq($List.length(grid),0) ? _U.list([A2($Graphics$Collage.filled,
             $Color.green,
@@ -7374,46 +7402,75 @@ Elm.Main.make = function (_elm) {
       return $Graphics$Collage.path(_U.list([{ctor: "_Tuple2",_0: limit / 2 - col * 100,_1: limit / 2}
                                             ,{ctor: "_Tuple2",_0: limit / 2 - col * 100,_1: 0 - limit / 2}]));
    };
-   var background = F5(function (_p34,board,position,c1,c2) {
-      var _p35 = _p34;
+   var background2 = F5(function (_p40,board,position,c1,c2) {
+      var _p41 = _p40;
+      var _p43 = _p41._0;
+      var _p42 = _p41._1;
       return A2($Basics._op["++"],
-      _U.list([A2($Graphics$Collage.filled,$Color.black,A2($Graphics$Collage.rect,$Basics.toFloat(_p35._0),$Basics.toFloat(_p35._1)))
-              ,A2($Graphics$Collage.filled,$Color.white,$Graphics$Collage.square(limit + 5))
-              ,A2($Graphics$Collage.filled,$Color.black,$Graphics$Collage.square(limit))
-              ,A2($Graphics$Collage.move,{ctor: "_Tuple2",_0: 0,_1: 285},A2($Graphics$Collage.filled,$Color.white,A2($Graphics$Collage.rect,255,105)))
-              ,A2($Graphics$Collage.move,{ctor: "_Tuple2",_0: 0,_1: 285},A2($Graphics$Collage.filled,$Color.black,A2($Graphics$Collage.rect,250,100)))
+      _U.list([A2($Graphics$Collage.filled,$Color.white,A2($Graphics$Collage.rect,$Basics.toFloat(_p43),$Basics.toFloat(_p42)))
+              ,$Graphics$Collage.toForm(A3($Graphics$Element.image,_p43,_p42,"2048FullBackground.png"))
+              ,A2($Graphics$Collage.filled,$Color.white,$Graphics$Collage.square(limit - 5))
+              ,A2($Graphics$Collage.move,{ctor: "_Tuple2",_0: 0,_1: 290},$Graphics$Collage.toForm(A3($Graphics$Element.image,250,135,"2048Logo.png")))
               ,A2($Graphics$Collage.move,
-              {ctor: "_Tuple2",_0: 0,_1: 300},
-              $Graphics$Collage.text($Text.bold(A2($Text.height,100,A2($Text.color,$Color.white,$Text.fromString("2048"))))))
-              ,A2($Graphics$Collage.move,
-              {ctor: "_Tuple2",_0: 200,_1: 325},
-              $Graphics$Collage.text($Text.bold(A2($Text.height,25,A2($Text.color,$Color.white,$Text.fromString("Score"))))))
+              {ctor: "_Tuple2",_0: 200,_1: 320},
+              $Graphics$Collage.text($Text.bold(A2($Text.height,25,A2($Text.color,$Color.black,$Text.fromString("Score"))))))
               ,A2($Graphics$Collage.move,
               {ctor: "_Tuple2",_0: 200,_1: 300},
-              $Graphics$Collage.text($Text.bold(A2($Text.height,20,A2($Text.color,$Color.white,$Text.fromString($Basics.toString(sumGrid(board))))))))
+              $Graphics$Collage.text($Text.bold(A2($Text.height,20,A2($Text.color,$Color.black,$Text.fromString($Basics.toString(sumGrid(board))))))))
               ,A2($Graphics$Collage.moveY,
               -250,
               $Graphics$Collage.text($Text.bold(A2($Text.color,$Color.white,$Text.fromString("Use the arrow keys to combine the squares!")))))]),
       A2($Basics._op["++"],
       gridToPic(board),
-      _U.list([A2($Graphics$Collage.traced,$Graphics$Collage.solid($Color.white),line(1))
-              ,A2($Graphics$Collage.traced,$Graphics$Collage.solid($Color.white),line(2))
-              ,A2($Graphics$Collage.traced,$Graphics$Collage.solid($Color.white),line(3))
-              ,A2($Graphics$Collage.traced,$Graphics$Collage.solid($Color.white),lineVert(1))
-              ,A2($Graphics$Collage.traced,$Graphics$Collage.solid($Color.white),lineVert(2))
-              ,A2($Graphics$Collage.traced,$Graphics$Collage.solid($Color.white),lineVert(3))])));
+      _U.list([A2($Graphics$Collage.move,{ctor: "_Tuple2",_0: 0,_1: 0},$Graphics$Collage.toForm(A3($Graphics$Element.image,400,400,"board.png")))])));
    });
-   var view = F2(function (_p36,board) {
-      var _p37 = _p36;
-      var _p39 = _p37._0;
-      var _p38 = _p37._1;
+   var view = F2(function (_p44,board) {
+      var _p45 = _p44;
+      var _p47 = _p45._0;
+      var _p46 = _p45._1;
       return A3($Graphics$Collage.collage,
-      _p39,
-      _p38,
-      A5(background,{ctor: "_Tuple2",_0: _p39,_1: _p38},board,{ctor: "_Tuple2",_0: 0,_1: 0},$Color.lightBrown,$Color.lightGrey));
+      _p47,
+      _p46,
+      A5(background2,{ctor: "_Tuple2",_0: _p47,_1: _p46},board,{ctor: "_Tuple2",_0: 0,_1: 0},$Color.lightBrown,$Color.lightGrey));
+   });
+   var strafe = F2(function (keys,p) {
+      return _U.update(p,
+      {x: _U.cmp(keys.x,0) < 0 ? _U.cmp(p.x - squareSize,(0 - limit) / 2) > -1 ? p.x - squareSize : p.x : _U.cmp(keys.x,0) > 0 ? _U.cmp(p.x + squareSize,
+      limit / 2) < 1 ? p.x + squareSize : p.x : p.x
+      ,y: _U.cmp(keys.y,0) < 0 ? _U.cmp(p.y - squareSize,(0 - limit) / 2) > -1 ? p.y - squareSize : p.y : _U.cmp(keys.y,0) > 0 ? _U.cmp(p.y + squareSize,
+      limit / 2) < 1 ? p.y + squareSize : p.y : p.y});
+   });
+   var background = F4(function (position,c1,c2,p) {
+      return _U.list([A2($Graphics$Collage.filled,$Color.black,$Graphics$Collage.square(limit + 5))
+                     ,A2($Graphics$Collage.filled,$Color.grey,$Graphics$Collage.square(limit))
+                     ,A2($Graphics$Collage.move,{ctor: "_Tuple2",_0: -150,_1: 150},A2($Graphics$Collage.filled,c1,$Graphics$Collage.square(squareSize)))
+                     ,A2($Graphics$Collage.move,{ctor: "_Tuple2",_0: -50,_1: 150},A2($Graphics$Collage.filled,c2,$Graphics$Collage.square(squareSize)))
+                     ,A2($Graphics$Collage.move,{ctor: "_Tuple2",_0: 50,_1: 150},A2($Graphics$Collage.filled,c1,$Graphics$Collage.square(squareSize)))
+                     ,A2($Graphics$Collage.move,{ctor: "_Tuple2",_0: 150,_1: 150},A2($Graphics$Collage.filled,c2,$Graphics$Collage.square(squareSize)))
+                     ,A2($Graphics$Collage.move,{ctor: "_Tuple2",_0: -150,_1: 50},A2($Graphics$Collage.filled,c2,$Graphics$Collage.square(squareSize)))
+                     ,A2($Graphics$Collage.move,{ctor: "_Tuple2",_0: -50,_1: 50},A2($Graphics$Collage.filled,c1,$Graphics$Collage.square(squareSize)))
+                     ,A2($Graphics$Collage.move,{ctor: "_Tuple2",_0: 50,_1: 50},A2($Graphics$Collage.filled,c2,$Graphics$Collage.square(squareSize)))
+                     ,A2($Graphics$Collage.move,{ctor: "_Tuple2",_0: 150,_1: 50},A2($Graphics$Collage.filled,c1,$Graphics$Collage.square(squareSize)))
+                     ,A2($Graphics$Collage.move,{ctor: "_Tuple2",_0: -150,_1: -50},A2($Graphics$Collage.filled,c1,$Graphics$Collage.square(squareSize)))
+                     ,A2($Graphics$Collage.move,{ctor: "_Tuple2",_0: -50,_1: -50},A2($Graphics$Collage.filled,c2,$Graphics$Collage.square(squareSize)))
+                     ,A2($Graphics$Collage.move,{ctor: "_Tuple2",_0: 50,_1: -50},A2($Graphics$Collage.filled,c1,$Graphics$Collage.square(squareSize)))
+                     ,A2($Graphics$Collage.move,{ctor: "_Tuple2",_0: 150,_1: -50},A2($Graphics$Collage.filled,c2,$Graphics$Collage.square(squareSize)))
+                     ,A2($Graphics$Collage.move,{ctor: "_Tuple2",_0: -150,_1: -150},A2($Graphics$Collage.filled,c2,$Graphics$Collage.square(squareSize)))
+                     ,A2($Graphics$Collage.move,{ctor: "_Tuple2",_0: -50,_1: -150},A2($Graphics$Collage.filled,c1,$Graphics$Collage.square(squareSize)))
+                     ,A2($Graphics$Collage.move,{ctor: "_Tuple2",_0: 50,_1: -150},A2($Graphics$Collage.filled,c2,$Graphics$Collage.square(squareSize)))
+                     ,A2($Graphics$Collage.move,{ctor: "_Tuple2",_0: 150,_1: -150},A2($Graphics$Collage.filled,c1,$Graphics$Collage.square(squareSize)))
+                     ,A2($Graphics$Collage.move,
+                     {ctor: "_Tuple2",_0: 0,_1: 300},
+                     $Graphics$Collage.text($Text.bold(A2($Text.height,100,$Text.fromString("2048")))))
+                     ,A2($Graphics$Collage.move,position,A2($Graphics$Collage.filled,$Color.black,$Graphics$Collage.square(squareSize)))
+                     ,A2($Graphics$Collage.move,
+                     {ctor: "_Tuple2",_0: 0,_1: -300},
+                     $Graphics$Collage.text($Text.fromString(A2($Basics._op["++"],
+                     "vx: ",
+                     A2($Basics._op["++"],$Basics.toString(p.vx),A2($Basics._op["++"],", ",A2($Basics._op["++"],"vy: ",$Basics.toString(p.vy))))))))]);
    });
    var board = _U.list([_U.list([0,0,0,0]),_U.list([0,0,0,0]),_U.list([0,0,0,0]),_U.list([0,0,2,0])]);
-   var main = A3($Signal.map2,view,$Window.dimensions,A3($Signal.foldp,update,board,input));
+   var main = A3($Signal.map2,view,$Window.dimensions,A3($Signal.foldp,update2,board,input));
    var Piece = F5(function (a,b,c,d,e) {    return {x: a,y: b,vx: c,vy: d,val: e};});
    var Keys = F2(function (a,b) {    return {x: a,y: b};});
    return _elm.Main.values = {_op: _op
@@ -7455,13 +7512,20 @@ Elm.Main.make = function (_elm) {
                              ,listEquals: listEquals
                              ,gridEquals: gridEquals
                              ,genSquare: genSquare
+                             ,genPic2: genPic2
+                             ,genPic: genPic
                              ,rowSquare: rowSquare
                              ,gridToPic: gridToPic
                              ,line: line
                              ,lineVert: lineVert
-                             ,background: background
-                             ,update: update
+                             ,background2: background2
+                             ,update2: update2
                              ,view: view
                              ,main: main
-                             ,input: input};
+                             ,input: input
+                             ,moveTile: moveTile
+                             ,physics: physics
+                             ,strafe: strafe
+                             ,update: update
+                             ,background: background};
 };</script></head><body><script type="text/javascript">Elm.fullscreen(Elm.Main)</script></body></html>
