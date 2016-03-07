@@ -8506,11 +8506,11 @@ Elm.Main.make = function (_elm) {
       var downTrue = A2(gridEquals,board,down);
       var up = A2(manipY,board,Up);
       var upTrue = A2(gridEquals,board,up);
-      return upTrue && (downTrue && (rightTrue && leftTrue)) ? A2(insertRand,board,_p54) : _U.cmp(_p55.y,0) > 0 ? upTrue ? board : A2(insertRand,
-      up,
-      _p54) : _U.cmp(_p55.y,0) < 0 ? downTrue ? board : A2(insertRand,down,_p54) : _U.cmp(_p55.x,0) > 0 ? rightTrue ? board : A2(insertRand,
-      right,
-      _p54) : _U.cmp(_p55.x,0) < 0 ? leftTrue ? board : A2(insertRand,left,_p54) : board;
+      return upTrue && (downTrue && (rightTrue && leftTrue)) ? A2(insertRand,
+      _U.list([_U.list([0,0,0,0]),_U.list([0,0,0,0]),_U.list([0,0,0,0]),_U.list([0,0,0,0])]),
+      _p54) : _U.cmp(_p55.y,0) > 0 ? upTrue ? board : A2(insertRand,up,_p54) : _U.cmp(_p55.y,0) < 0 ? downTrue ? board : A2(insertRand,
+      down,
+      _p54) : _U.cmp(_p55.x,0) > 0 ? rightTrue ? board : A2(insertRand,right,_p54) : _U.cmp(_p55.x,0) < 0 ? leftTrue ? board : A2(insertRand,left,_p54) : board;
    });
    var main = A3($Signal.map2,view,$Window.dimensions,A3($Signal.foldp,update,board,input));
    var Keys = F2(function (a,b) {    return {x: a,y: b};});
